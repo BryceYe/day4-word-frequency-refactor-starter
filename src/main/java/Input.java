@@ -1,20 +1,22 @@
 public class Input {
-    private String value;
+    private String word;
     private int count;
 
-    public Input(String w, int i){
-        this.value =w;
-        this.count =i;
+    public Input(String word, int count) {
+        this.word = word;
+        this.count = count;
     }
 
-
-    public String getValue() {
-        return this.value;
+    public String getWord() {
+        return word;
     }
-
+    public void setWord(String word) {
+        this.word = word;
+    }
     public int getWordCount() {
-        return this.count;
+        return count;
     }
-
-
+    public void setWordCount(int count) {
+        this.count = count;
+    }
 }
