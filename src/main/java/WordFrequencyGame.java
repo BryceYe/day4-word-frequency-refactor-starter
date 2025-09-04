@@ -15,10 +15,10 @@ public class WordFrequencyGame {
             try {
                 //split the input string with 1 to n pieces of spaces
                 String[] words = inputStr.split(ANY_SPACE_SEPARATOR);
-                List<Input> inputList = countFrequency(words);
-                inputList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+                List<Input> frequencies = countFrequency(words);
+                frequencies.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
                 StringJoiner joiner = new StringJoiner("\n");
-                for (Input w : inputList) {
+                for (Input w : frequencies) {
                     String s = w.getValue() + " " + w.getWordCount();
                     joiner.add(s);
                 }
