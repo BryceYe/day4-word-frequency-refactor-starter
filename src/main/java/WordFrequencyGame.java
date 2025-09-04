@@ -30,33 +30,34 @@ public class WordFrequencyGame {
     }
 
     private List<Input> countFrequencies(String[] words) {
-        List<Input> inputList = new ArrayList<>();
-        for (String s : words) {
-            Input input = new Input(s, 1);
-            inputList.add(input);
-        }
-        //get the map for the next step of sizing the same word
-        Map<String, List<Input>> map = getListMap(inputList);
+        Map<String, List<String>> groups = groupSameWords(words);
         List<Input> frequencies = new ArrayList<>();
-        for (Map.Entry<String, List<Input>> entry : map.entrySet()) {
+        for (Map.Entry<String, List<String>> entry : groups.entrySet()) {
             Input input = new Input(entry.getKey(), entry.getValue().size());
             frequencies.add(input);
         }
         return frequencies;
     }
 
-    private Map<String, List<Input>> getListMap(List<Input> inputList) {
-        Map<String, List<Input>> map = new HashMap<>();
-        for (Input input : inputList) {
+    private static Map<String, List<String>> groupSameWords(String[] words) {
+        List<String> inputList = new ArrayList<>();
+        for (String s : words) {
+            inputList.add(s);
+        }
+        //get the map for the next step of sizing the same word
+        Map<String, List<String>> map1 = new HashMap<>();
+        for (String input1 : inputList) {
 //       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!map.containsKey(input.getValue())) {
-                ArrayList<Input> arr = new ArrayList<>();
-                arr.add(input);
-                map.put(input.getValue(), arr);
+            if (!map1.containsKey(input1)) {
+                ArrayList arr = new ArrayList<>();
+                arr.add(input1);
+                map1.put(input1, arr);
             } else {
-                map.get(input.getValue()).add(input);
+                map1.get(input1).add(input1);
             }
         }
+        Map<String, List<String>> map = map1;
         return map;
     }
+
 }
