@@ -11,7 +11,7 @@ public class WordFrequencyGame {
             return inputStr + " 1";
         } else {
             try {
-                List<Input> frequencies = countFrequencies(words);
+                List<WordFrequency> frequencies = countFrequencies(words);
                 frequencies.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
                 return composeOutput(frequencies);
             } catch (Exception e) {
@@ -20,7 +20,7 @@ public class WordFrequencyGame {
         }
     }
 
-    private static String composeOutput(List<Input> frequencies) {
+    private static String composeOutput(List<WordFrequency> frequencies) {
         StringJoiner joiner = new StringJoiner("\n");
         frequencies.stream()
             .map(w -> w.getWord() + " " + w.getWordCount())
@@ -28,13 +28,13 @@ public class WordFrequencyGame {
         return joiner.toString();
     }
 
-    private List<Input> countFrequencies(String[] words) {
+    private List<WordFrequency> countFrequencies(String[] words) {
         Map<String, Integer> frequencyMap = new HashMap<>();
         Arrays.stream(words).forEach(word ->
             frequencyMap.put(word, frequencyMap.getOrDefault(word, 0) + 1)
         );
-        List<Input> frequencies = new ArrayList<>();
-        frequencyMap.forEach((word, count) -> frequencies.add(new Input(word, count)));
+        List<WordFrequency> frequencies = new ArrayList<>();
+        frequencyMap.forEach((word, count) -> frequencies.add(new WordFrequency(word, count)));
         return frequencies;
     }
 
