@@ -45,18 +45,17 @@ public class WordFrequencyGame {
             inputList.add(s);
         }
         //get the map for the next step of sizing the same word
-        Map<String, List<String>> map1 = new HashMap<>();
-        for (String input1 : inputList) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String input : inputList) {
 //       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!map1.containsKey(input1)) {
+            if (!map.containsKey(input)) {
                 ArrayList arr = new ArrayList<>();
-                arr.add(input1);
-                map1.put(input1, arr);
+                arr.add(input);
+                map.put(input, arr);
             } else {
-                map1.get(input1).add(input1);
+                map.get(input).add(input);
             }
         }
-        Map<String, List<String>> map = map1;
         return map;
     }
 
