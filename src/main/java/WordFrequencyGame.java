@@ -26,10 +26,9 @@ public class WordFrequencyGame {
 
     private static String composeOutput(List<Input> frequencies) {
         StringJoiner joiner = new StringJoiner("\n");
-        for (Input w : frequencies) {
-            String s = w.getWord() + " " + w.getWordCount();
-            joiner.add(s);
-        }
+        frequencies.stream()
+            .map(w -> w.getWord() + " " + w.getWordCount())
+            .forEach(joiner::add);
         return joiner.toString();
     }
 
