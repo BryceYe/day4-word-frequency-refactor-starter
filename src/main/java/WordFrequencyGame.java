@@ -15,7 +15,7 @@ public class WordFrequencyGame {
             try {
                 //split the input string with 1 to n pieces of spaces
                 String[] words = inputStr.split(ANY_SPACE_SEPARATOR);
-                List<Input> frequencies = countFrequency(words);
+                List<Input> frequencies = countFrequencies(words);
                 frequencies.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
                 StringJoiner joiner = new StringJoiner("\n");
                 for (Input w : frequencies) {
@@ -29,7 +29,7 @@ public class WordFrequencyGame {
         }
     }
 
-    private List<Input> countFrequency(String[] words) {
+    private List<Input> countFrequencies(String[] words) {
         List<Input> inputList = new ArrayList<>();
         for (String s : words) {
             Input input = new Input(s, 1);
@@ -37,13 +37,12 @@ public class WordFrequencyGame {
         }
         //get the map for the next step of sizing the same word
         Map<String, List<Input>> map = getListMap(inputList);
-        List<Input> list = new ArrayList<>();
+        List<Input> frequencies = new ArrayList<>();
         for (Map.Entry<String, List<Input>> entry : map.entrySet()) {
             Input input = new Input(entry.getKey(), entry.getValue().size());
-            list.add(input);
+            frequencies.add(input);
         }
-        inputList = list;
-        return inputList;
+        return frequencies;
     }
 
     private Map<String, List<Input>> getListMap(List<Input> inputList) {
@@ -51,7 +50,7 @@ public class WordFrequencyGame {
         for (Input input : inputList) {
 //       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
             if (!map.containsKey(input.getValue())) {
-                ArrayList arr = new ArrayList<>();
+                ArrayList<Input> arr = new ArrayList<>();
                 arr.add(input);
                 map.put(input.getValue(), arr);
             } else {
