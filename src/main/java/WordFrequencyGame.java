@@ -13,7 +13,6 @@ public class WordFrequencyGame {
             return inputStr + " 1";
         } else {
             try {
-                //split the input string with 1 to n pieces of spaces
                 String[] words = inputStr.split(ANY_SPACE_SEPARATOR);
                 List<Input> frequencies = countFrequencies(words);
                 frequencies.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
@@ -48,7 +47,6 @@ public class WordFrequencyGame {
         for (String s : words) {
             inputList.add(s);
         }
-        //get the map for the next step of sizing the same word
         Map<String, List<String>> map = new HashMap<>();
         for (String input : inputList) {
 //       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
