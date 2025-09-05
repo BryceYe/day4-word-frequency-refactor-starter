@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
@@ -21,21 +22,18 @@ public class WordFrequencyGame {
     }
 
     private static String composeOutput(List<WordFrequency> frequencies) {
-        StringJoiner joiner = new StringJoiner("\n");
-        frequencies.stream()
+        return frequencies.stream()
             .map(w -> w.getWord() + " " + w.getWordCount())
-            .forEach(joiner::add);
-        return joiner.toString();
+            .collect(Collectors.joining("\n"));
     }
 
     private List<WordFrequency> countFrequencies(String[] words) {
-        Map<String, Integer> frequencyMap = new HashMap<>();
-        Arrays.stream(words).forEach(word ->
-            frequencyMap.put(word, frequencyMap.getOrDefault(word, 0) + 1)
-        );
-        List<WordFrequency> frequencies = new ArrayList<>();
-        frequencyMap.forEach((word, count) -> frequencies.add(new WordFrequency(word, count)));
-        return frequencies;
+        return Arrays.stream(words)
+            .collect(Collectors.groupingBy(w -> w, Collectors.summingInt(w -> 1)))
+            .entrySet()
+            .stream()
+            .map(e -> new WordFrequency(e.getKey(), e.getValue()))
+            .collect(Collectors.toList());
     }
 
 }
